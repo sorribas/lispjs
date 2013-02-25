@@ -46,17 +46,28 @@ empty = " "
 
 %%
 
-s_exps: | s_exps s_exp {  
+s_exps: empty | s_exps s_exp {  
   if($2 != NULL)
-    printf("S_EXPS: %s \n",(char *) $2->car);
+    printf("S_EXPS: %s ",(char *) $2->car);
+  if($1 == NULL)
+    printf("NULL S_EXPS\n");
+  else
+    printf("%d\n", $1->type);
+
   $$ = $2;
 }
 
+empty: {
+  $$ = NULL;
+};
+
 s_exp: atom | list {
+  $$ = $1;
   printf("S_EXP\n");
 };
 
 list: LPAREN s_exps RPAREN {
+  $$= NULL;
   printf("LIST\n");
 };
 
