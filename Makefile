@@ -1,7 +1,7 @@
 all:
 	lex lexer.l
 	yacc -d parser.y
-	gcc *.c -o lispjs
+	gcc *.c -ggdb -o lispjs
 
 clean:
 	rm parser.tab.*

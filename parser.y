@@ -1,7 +1,8 @@
 %{
 #include <stdio.h>
 #include <string.h>
-#define YYSTYPE char*
+#include "lisp_list.h"
+#define YYSTYPE LispList*
  
 void yyerror(const char *str)
 {
@@ -45,8 +46,10 @@ empty = " "
 
 %%
 
-s_exps: | s_exps s_exp {
-  printf("S_EXPS:\n");
+s_exps: | s_exps s_exp {  
+  if($2 != NULL)
+    printf("S_EXPS: %s \n",(char *) $2->car);
+  $$ = $2;
 }
 
 s_exp: atom | list {
