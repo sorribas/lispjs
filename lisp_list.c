@@ -56,7 +56,7 @@ void pushToList(LispList* xs, LispList* node){
 
 void printNode(LispList* node) {
   if (node->type != LIST) {
-    printf("%s, ", (char *)node->car);
+    printf("%s", (char *)node->car);
   } else {
     printList(node->car);
   }
@@ -69,6 +69,9 @@ void printList(LispList* xs){
   while (curr != NULL) {
     printNode(curr);
     curr = curr->cdr;
+    if(curr != NULL) {
+      printf(", ");
+    }
   }
-  printf("]\n");
+  printf("]");
 }

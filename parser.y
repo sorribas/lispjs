@@ -2,21 +2,22 @@
 #include <stdio.h>
 #include <string.h>
 #include "lisp_list.h"
+#include "parser.h"
 #define YYSTYPE LispList*
+
+static LispList* program;
  
-void yyerror(const char *str)
-{
+void yyerror(const char *str) {
         fprintf(stderr,"error: %s\n",str);
 }
  
-int yywrap()
-{
+int yywrap() {
         return 1;
 } 
   
-main()
-{
-        yyparse();
+LispList* parse() {
+  yyparse();
+  return program;
 } 
 
 %}
@@ -46,15 +47,18 @@ empty = " "
 
 %%
 
-s_exps: empty | s_exps s_exp {  
-  if($2 != NULL)
-    printf("S_EXPS: %s ",(char *) $2->car);
-  if($1 == NULL)
-    printf("NULL S_EXPS\n");
-  else
-    printf("%d\n", $1->type);
+program: s_exps {
+  program = $1;
+}
 
-  $$ = $2;
+s_exps: empty | s_exps s_exp {  
+  if($1 == NULL) {
+    $$ = $2;
+  }
+  else {
+    pushToList($1 ,$2);
+    $$ = $1;
+  }
 }
 
 empty: {
@@ -63,16 +67,13 @@ empty: {
 
 s_exp: atom | list {
   $$ = $1;
-  printf("S_EXP\n");
 };
 
 list: LPAREN s_exps RPAREN {
-  $$= NULL;
-  printf("LIST\n");
+  $$ = newListNode($2);
 };
 
 atom: NUMBER|ID|STRING {
-  printf("ATOM\n");
   $$ = $1;
 };
 %%

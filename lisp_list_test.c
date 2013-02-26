@@ -17,5 +17,9 @@ int main() {
   pushToList(xs, newStringNode("World"));
 
   printList(xs);
+
+  LispList* parseTree =  parse();
+  printList(parseTree);
+  printf("\n");
   return 0;
 }*/
