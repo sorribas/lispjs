@@ -34,6 +34,7 @@ void generateCodeForNode(LispList* node) {
 }
 
 void generateDefinition(LispList* node) {
+  // TODO validate this in semantic analyzer
   char* var = (char*)node->cdr->car;
   fprintf(out, "%s = ", var);
   generateCodeForNode(node->cdr->cdr);
