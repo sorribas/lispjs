@@ -16,18 +16,27 @@ void generateCodeForList(LispList* program) {
 
   while (curr != NULL) {
     generateCodeForNode(curr);
+    fprintf(out, ";\n");
     curr = curr->cdr;
   }
 
-  fprintf(out, ";\n");
 }
 
 void generateCodeForNode(LispList* node) {
   if(node->type == LIST) {
-    generateFuncCall(node->car);
+    if( ((LispList*) node->car)->type == ID_ATOM  && 0 == strcmp((char*) ((LispList*) node->car)->car , "def") )
+      generateDefinition(node->car);
+    else
+      generateFuncCall(node->car);
   } else {
     fprintf(out, "%s",(char *) node->car);
   }
+}
+
+void generateDefinition(LispList* node) {
+  char* var = (char*)node->cdr->car;
+  fprintf(out, "%s = ", var);
+  generateCodeForNode(node->cdr->cdr);
 }
 
 void generateFuncCall(LispList* xs) {
