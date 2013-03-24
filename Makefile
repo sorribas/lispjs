@@ -1,0 +1,2 @@
+all:
+	jison syntax.jison
