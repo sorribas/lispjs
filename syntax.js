@@ -28,9 +28,11 @@ case 6:
   this.$ = $$[$0-1];
 
 break;
-case 9:
-  this.$ = yytext;
-
+case 7: this.$ = {txt: yytext, type: 'number'}; 
+break;
+case 8: this.$ = {txt: yytext, type: 'id'}; 
+break;
+case 9: this.$ = {txt: yytext, type: 'string'}; 
 break;
 }
 },

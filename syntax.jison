@@ -33,6 +33,8 @@ list: LPAREN s_exps RPAREN {
   $$ = $2;
 };
 
-atom: NUMBER|ID|STRING {
-  $$ = yytext;
-};
+atom
+  : NUMBER { $$ = {txt: yytext, type: 'number'}; }
+  | ID { $$ = {txt: yytext, type: 'id'}; }
+  | STRING { $$ = {txt: yytext, type: 'string'}; }
+;
