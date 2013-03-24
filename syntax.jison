@@ -1,6 +1,3 @@
-
-/* description: Parses end executes mathematical expressions. */
-
 /* lexical grammar */
 %lex
 %%
@@ -20,31 +17,19 @@ L?\"(\\.|[^\\"])*\"     return 'STRING';
 
 
 program: s_exps {
-  console.log($1);
+  return $1;
 };
 
-
-/*empty: {
-  console.log('EMPTY');
-  $$ = null;
-};*/
-
 s_exps: s_exps s_exp {  
-    console.log($1 + ' ' +$2);
-    $1.push($2);
-    $$ = $1;
-  }
-|
-  { $$ = [];} 
-
-;
+  $1.push($2);
+  $$ = $1;
+} | { $$ = [];};
 
 s_exp: atom | list {
   $$ = $1;
 };
 
 list: LPAREN s_exps RPAREN {
-  console.log($2);
   $$ = $2;
 };
 

@@ -10,14 +10,13 @@ performAction: function anonymous(yytext,yyleng,yylineno,yy,yystate,$$,_$) {
 var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
-  console.log($$[$0]);
+  return $$[$0];
 
 break;
 case 2:  
-    console.log($$[$0-1] + ' ' +$$[$0]);
-    $$[$0-1].push($$[$0]);
-    this.$ = $$[$0-1];
-  
+  $$[$0-1].push($$[$0]);
+  this.$ = $$[$0-1];
+
 break;
 case 3: this.$ = [];
 break;
@@ -26,7 +25,6 @@ case 5:
 
 break;
 case 6:
-  console.log($$[$0-1]);
   this.$ = $$[$0-1];
 
 break;

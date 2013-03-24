@@ -1,2 +1,3 @@
 var parser = require('./syntax');
-parser.parse('(def a 3)');
+var sTree = parser.parse('(def a 3)');
+console.log(sTree);
