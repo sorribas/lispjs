@@ -1,9 +1,14 @@
-var parser = require('./syntax');
-var sTree = parser.parse('(def a 3) (def hey "hey") (alert "Hey" world) (def double (lambda(x) (plus x x) ))');
-//console.log(sTree);
+var fs = require('fs');
+fs.readFile(process.argv[2], 'utf8', function(err, data) {
 
-var semErrors = require('./semantic_analyzer').getSemanticErrors(sTree);
-//console.log(semErrors);
+  if (err) {
+    // exit
+    console.log(err);
+  }
 
-var code = require('./code_generator').generateCodeForList(sTree);
-console.log(code);
+  var parser = require('./syntax');
+  var sTree = parser.parse(data);
+  var semErrors = require('./semantic_analyzer').getSemanticErrors(sTree);
+  var code = require('./code_generator').generateCodeForList(sTree);
+  console.log(code);
+});

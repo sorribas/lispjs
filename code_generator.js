@@ -1,6 +1,23 @@
 var code = "";
 var _und = require('./underscore-min');
 var indentlevel = 0;
+var ljsIdentifiers = {
+  '+' : 'LispJs.plus',
+  '-' : 'LispJs.minus',
+  '*' : 'LispJs.times',
+  '/' : 'LispJs.div',
+  '=' : 'LispJs.equals',
+  '<' : 'LispJs.lessThan',
+  '>' : 'LispJs.greaterThan',
+  '->' : 'LispJs.get',
+  '->=' : 'LispJs.set',
+
+  'list' : 'LispJs.list'
+  'map' : 'LispJs._.map',
+  'fold-left' : 'LispJs._.foldl',
+  'fold-right' : 'LispJs._.foldr',
+  'filter' : 'LispJs._.filter',
+}
 
 var addIndent = function() {
   for (var i = 0; i < indentlevel; i++) {
@@ -17,7 +34,7 @@ var generateParameterList = function(xs) {
   // TODO validate this in semantic analyzer
   var i = 0;
   _und.each(xs, function(el) {
-    code += el;
+    code += el.txt;
     if (i < xs.length -1) {
       code += ", ";
     }
@@ -62,7 +79,8 @@ var generateCodeForNode = function(node) {
       generateFuncCall(node);
     }
   } else {
-    code += node.txt;
+    var identifier = typeof ljsIdentifiers[node.txt] != 'undefined' ? ljsIdentifiers[node.txt] : node.txt;
+    code += identifier;
   }
 }
 

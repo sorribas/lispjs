@@ -2,12 +2,14 @@
 %lex
 %%
 [0-9]+                  return 'NUMBER';
-[a-zA-Z\+\-\*]+         return 'ID';
+("->")("+")("-")("*")("/")        return 'ID';
+[a-zA-Z\$]+             return 'ID';
 L?\"(\\.|[^\\"])*\"     return 'STRING';
 \(                      return 'LPAREN';
 \)                      return 'RPAREN';
 \n                      /* ignore end of line */;
 [ \t]+                  /* ignore whitespace */;
+\s+                     /* ignore*/
 
 /lex
 
