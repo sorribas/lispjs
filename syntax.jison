@@ -2,8 +2,7 @@
 %lex
 %%
 [0-9]+                  return 'NUMBER';
-("->")("+")("-")("*")("/")        return 'ID';
-[a-zA-Z\$]+             return 'ID';
+[a-zA-Z\$\-\>\+\*\/]+             return 'ID';
 L?\"(\\.|[^\\"])*\"     return 'STRING';
 \(                      return 'LPAREN';
 \)                      return 'RPAREN';

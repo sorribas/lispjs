@@ -323,24 +323,22 @@ case 0:return 10;
 break;
 case 1:return 11;
 break;
-case 2:return 11;
+case 2:return 12;
 break;
-case 3:return 12;
+case 3:return 8;
 break;
-case 4:return 8;
+case 4:return 9;
 break;
-case 5:return 9;
+case 5:/* ignore end of line */;
 break;
-case 6:/* ignore end of line */;
+case 6:/* ignore whitespace */;
 break;
-case 7:/* ignore whitespace */;
-break;
-case 8:/* ignore*/
+case 7:/* ignore*/
 break;
 }
 },
-rules: [/^(?:[0-9]+)/,/^(?:(->)(\+)(-)(\*)(\/))/,/^(?:[a-zA-Z\$]+)/,/^(?:L?"(\\.|[^\\"])*")/,/^(?:\()/,/^(?:\))/,/^(?:\n\b)/,/^(?:[ \t]+)/,/^(?:\s+)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8],"inclusive":true}}
+rules: [/^(?:[0-9]+)/,/^(?:[a-zA-Z\$\-\>\+\*\/]+)/,/^(?:L?"(\\.|[^\\"])*")/,/^(?:\()/,/^(?:\))/,/^(?:\n\b)/,/^(?:[ \t]+)/,/^(?:\s+)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7],"inclusive":true}}
 };
 return lexer;
 })();

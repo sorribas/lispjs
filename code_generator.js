@@ -12,11 +12,12 @@ var ljsIdentifiers = {
   '->' : 'LispJs.get',
   '->=' : 'LispJs.set',
 
-  'list' : 'LispJs.list'
+  'list' : 'LispJs.list',
   'map' : 'LispJs._.map',
   'fold-left' : 'LispJs._.foldl',
   'fold-right' : 'LispJs._.foldr',
   'filter' : 'LispJs._.filter',
+  'call' : 'LispJs.call'
 }
 
 var addIndent = function() {
