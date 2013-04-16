@@ -1,0 +1,25 @@
+(def contacts (list 
+  (object (list 
+    "name" "Dennis Ritchie"
+    "phone" "3045553141")) 
+  (object (list 
+    "name" "Edsger Dijkstra"
+    "phone" "3045551618"))
+  (object (list 
+    "name" "Donald Knuth"
+    "phone" "3045551346"))))
+
+"Hola esto es un comentario"
+
+(def updateTable (lambda()
+  (call ($ "#addrTbl tbody") "html" "")
+  (call $ "each" contacts (lambda(i x)
+    (call ($ "#addrTbl tbody") "append" (+ "<tr contacti='" i "'><td>" 
+      (-> x "name") "</td> <td>" 
+      (-> x "phone")"</td><td><button class='btn btn-danger'>Delete</button></td></tr>"))))
+  (call ($ ".btn-danger") "click" (lambda () 
+    (def contactId (call (call ($ this) "parents" "tr") "attr" "contacti"))
+    (call contacts "splice" contactId 1)
+    (updateTable)))))
+
+(jQuery (lambda($) (updateTable)))

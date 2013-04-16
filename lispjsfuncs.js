@@ -32,7 +32,14 @@ LispJs.div = function() {
   return res;
 };
 
-LispJs.list = function() { return arguments; };
+LispJs.list = function() { return Array.prototype.slice.call(arguments); };
+LispJs.createObjFromArray = function(xs) {
+  var r = {};
+  for (var i = 0; i < xs.length; i+=2) {
+    r[xs[i]] = xs[i+1];
+  }
+  return r;
+};
 
 LispJs.equals = function(a, b) { return a == b; };
 LispJs.lessThan = function(a, b) { return a < b; };
@@ -42,7 +49,7 @@ LispJs.get = function(obj, i) { return obj[i]; };
 LispJs.set = function(obj, i, val) { obj[i] = val; };
 LispJs.callFunWithObj = function(obj, func) { 
   var args = Array.prototype.slice.call(arguments);
-  obj[func].apply(obj, args.slice(2)); 
+  return obj[func].apply(obj, args.slice(2)); 
 };
 
 

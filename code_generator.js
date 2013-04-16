@@ -13,6 +13,7 @@ var ljsIdentifiers = {
   '->=' : 'LispJs.set',
 
   'list' : 'LispJs.list',
+  'object' : 'LispJs.createObjFromArray',
   'map' : 'LispJs._.map',
   'fold-left' : 'LispJs._.foldl',
   'fold-right' : 'LispJs._.foldr',
@@ -33,8 +34,7 @@ var generateDefinition = function(node) {
 
 var generateParameterList = function(xs) {
   // TODO validate this in semantic analyzer
-  var i = 0;
-  _und.each(xs, function(el) {
+  _und.each(xs, function(el, i) {
     code += el.txt;
     if (i < xs.length -1) {
       code += ", ";
