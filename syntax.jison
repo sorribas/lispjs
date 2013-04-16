@@ -1,14 +1,14 @@
 /* lexical grammar */
 %lex
 %%
-[0-9]+                  return 'NUMBER';
+[0-9]+                            return 'NUMBER';
 [a-zA-Z\$\-\>\+\*\/]+             return 'ID';
-L?\"(\\.|[^\\"])*\"     return 'STRING';
-\(                      return 'LPAREN';
-\)                      return 'RPAREN';
-\n                      /* ignore end of line */;
-[ \t]+                  /* ignore whitespace */;
-\s+                     /* ignore*/
+L?\"(\\.|[^\\"])*\"               return 'STRING';
+\(                                return 'LPAREN';
+\)                                return 'RPAREN';
+\n                                /* ignore end of line */;
+[ \t]+                            /* ignore whitespace */;
+\s+                               /* ignore*/
 
 /lex
 

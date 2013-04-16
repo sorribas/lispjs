@@ -17,7 +17,7 @@ var ljsIdentifiers = {
   'fold-left' : 'LispJs._.foldl',
   'fold-right' : 'LispJs._.foldr',
   'filter' : 'LispJs._.filter',
-  'call' : 'LispJs.call'
+  'call' : 'LispJs.callFunWithObj'
 }
 
 var addIndent = function() {
