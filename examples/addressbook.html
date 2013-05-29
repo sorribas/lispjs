@@ -55,6 +55,7 @@
 
       <h1>Contactos</h1>
 
+      <a href="#" id="addContactBtn" class="btn btn-primary">+Agregar contacto</a>
       <table id="addrTbl" class="table">
         <thead>
           <tr>
@@ -66,6 +67,17 @@
         <tbody>
         </tbody>
       </table>
+
+      <div id="addModal" class="modal hide fade">
+        <div class="modal-header">
+          <input type="text" id="newName" placeholder="Nombre" />
+          <input type="text" id="newPhone" placeholder="Teléfono" />
+        </div>
+
+        <div class="modal-footer">
+        <a href="#" id="addBtn" class="btn btn-primary">Agregar</a>
+        </div>
+      </div>
 
     </div> <!-- /container -->
 

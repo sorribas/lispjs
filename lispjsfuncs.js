@@ -1,8 +1,8 @@
 var LispJs = { };
 
 LispJs.plus = function() { 
-  var res = 0; 
-  for(var i = 0; i < arguments.length; ++i) {
+  var res = arguments[0]; 
+  for(var i = 1; i < arguments.length; ++i) {
     res += arguments[i];
   } 
   return res;

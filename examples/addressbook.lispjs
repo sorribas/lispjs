@@ -9,17 +9,26 @@
     "name" "Donald Knuth"
     "phone" "3045551346"))))
 
-"Hola esto es un comentario"
-
 (def updateTable (lambda()
   (call ($ "#addrTbl tbody") "html" "")
   (call $ "each" contacts (lambda(i x)
     (call ($ "#addrTbl tbody") "append" (+ "<tr contacti='" i "'><td>" 
       (-> x "name") "</td> <td>" 
-      (-> x "phone")"</td><td><button class='btn btn-danger'>Delete</button></td></tr>"))))
+      (-> x "phone")"</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>"))))
   (call ($ ".btn-danger") "click" (lambda () 
     (def contactId (call (call ($ this) "parents" "tr") "attr" "contacti"))
     (call contacts "splice" contactId 1)
     (updateTable)))))
 
-(jQuery (lambda($) (updateTable)))
+(jQuery (lambda($) 
+  (call ($ "#addContactBtn") "click" (lambda()
+    (call ($ "#addModal") "modal" )
+  ))
+  (call ($ "#addBtn") "click" (lambda()
+    (call contacts "push"
+      (object (list 
+        "name" (+ (call ($ "#newName") "val") "pardo" )
+        "phone" (call ($ "#newPhone") "val"))))
+    (updateTable)
+    (call ($ "#addModal") "modal" "hide")))
+  (updateTable)))
