@@ -1,16 +1,31 @@
 #!/usr/bin/env node
 
+var pkginfo = require('pkginfo')(module, 'version');
+var argv = require('optimist').argv;
 var fs = require('fs');
-fs.readFile(process.argv[2], 'utf8', function(err, data) {
+
+if (typeof argv._[0] == 'undefined' || typeof argv.o == 'undefined') {
+  console.log("LispJS " + module.exports.version);
+  console.log("Usage: " + argv['$0'] + " -o outputfile.js inputfile.lispjs");
+  process.exit(0);
+}
+
+fs.readFile(argv._[0], 'utf8', function(err, data) {
 
   if (err) {
-    // exit
-    console.log(err);
+    console.log("Error opening input file");
+    process.exit(1)
   }
 
   var parser = require('./syntax');
   var sTree = parser.parse(data);
-  //var semErrors = require('./semantic_analyzer').getSemanticErrors(sTree);
+  var semErrors = require('./semantic_analyzer').getSemanticErrors(sTree);
   var code = require('./code_generator').generateCodeForList(sTree);
-  console.log(code);
+
+  fs.writeFile(argv.o, code, function(err) {
+    if (err) {
+      console.log("Error writing file "+ argv.o + ": " + err);
+      process.exit(2)
+    }
+  });
 });

@@ -13,7 +13,7 @@ var getFuncCallErrors = function(sTree) {
   }
 
   _und.each(sTree, function(el) {
-    if (el instanceof Array) {
+    if (el instanceof Array && el.length > 0) {
       errs = errs.concat(getFuncCallErrors(el));
     }
   });
