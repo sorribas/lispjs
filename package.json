@@ -1,0 +1,15 @@
+{
+  "name": "lispjs",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node lispjs"
+  },
+  "dependencies": {
+    "optimist": "*",
+    "pkginfo": "*"
+  },
+  "bin": {
+    "lispjs": "./lispjs"
+  }
+}
