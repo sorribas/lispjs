@@ -17,7 +17,7 @@ LispJs.minus = function() {
 };
 
 LispJs.times = function() { 
-  var res = 0; 
+  var res = 1; 
   for(var i = 0; i < arguments.length; ++i) {
     res *= arguments[i];
   } 
@@ -25,8 +25,8 @@ LispJs.times = function() {
 };
 
 LispJs.div = function() { 
-  var res = 0; 
-  for(var i = 0; i < arguments.length; ++i) {
+  var res = arguments[0]; 
+  for(var i = 1; i < arguments.length; ++i) {
     res /= arguments[i];
   } 
   return res;
@@ -114,6 +114,7 @@ LispJs.callFunWithObj = function(obj, func) {
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = _;
     }
+    exports.LispJs = LispJs;
     exports.LispJs._ = _;
   } else {
     root.LispJs._ = _;

@@ -47,7 +47,11 @@ var generateLambda = function(node) {
   generateParameterList(node[1]);
   code += ") {\n";
   indentlevel++;
-  generateCodeForList(node.slice(2));
+  generateCodeForList(node.slice(2), true);
+  addIndent();
+  code += "return (";
+  generateCodeForNode(node.slice(2)[node.slice(2).length - 1]);
+  code += ");\n";
   indentlevel--;
   addIndent();
   code += "}";
@@ -85,15 +89,31 @@ var generateCodeForNode = function(node) {
   }
 }
 
-var generateCodeForList = function(sTree) {
+var generateCodeForList = function(sTree, isInFunction) {
+  if (typeof isInFunction == 'undefined') {
+    isInFunction = false;
+  }
 
+  var i = 0;
   _und.each(sTree, function(el) {
-    addIndent();
-    generateCodeForNode(el);
-    code += ";\n";
+    if (isInFunction && i == sTree.length - 1) {
+      // do nothing...
+    } else {
+      addIndent();
+      generateCodeForNode(el);
+      code += ";\n";
+    }
+
+    i++;
   });
 
   return code;
 }
 
+var clearCode = function() {
+  code = "";
+  indentlevel = 0;
+}
+
 exports.generateCodeForList = generateCodeForList;
+exports.clearCode = clearCode;

@@ -11,5 +11,9 @@
   },
   "bin": {
     "lispjs": "./lispjs"
+  },
+  "devDependencies": {
+    "mocha": "1.10.0",
+    "should": "1.2.2"
   }
 }
