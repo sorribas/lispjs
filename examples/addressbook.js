@@ -2,23 +2,22 @@ contacts = LispJs.list(LispJs.createObjFromArray(LispJs.list("name", "Dennis Rit
 updateTable = function() {
   LispJs.callFunWithObj($("#addrTbl tbody"), "html", "");
   LispJs.callFunWithObj($, "each", contacts, function(i, x) {
-    LispJs.callFunWithObj($("#addrTbl tbody"), "append", LispJs.plus("<tr contacti='", i, "'><td>", LispJs.get(x, "name"), "</td> <td>", LispJs.get(x, "phone"), "</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>"));
+    return (LispJs.callFunWithObj($("#addrTbl tbody"), "append", LispJs.plus("<tr contacti='", i, "'><td>", LispJs.get(x, "name"), "</td> <td>", LispJs.get(x, "phone"), "</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>")));
   });
-  LispJs.callFunWithObj($(".btn-danger"), "click", function() {
+  return (LispJs.callFunWithObj($(".btn-danger"), "click", function() {
     contactId = LispJs.callFunWithObj(LispJs.callFunWithObj($(this), "parents", "tr"), "attr", "contacti");
     LispJs.callFunWithObj(contacts, "splice", contactId, 1);
-    updateTable();
-  });
+    return (updateTable());
+  }));
 };
 jQuery(function($) {
   LispJs.callFunWithObj($("#addContactBtn"), "click", function() {
-    LispJs.callFunWithObj($("#addModal"), "modal");
+    return (LispJs.callFunWithObj($("#addModal"), "modal"));
   });
   LispJs.callFunWithObj($("#addBtn"), "click", function() {
-    LispJs.callFunWithObj(contacts, "push", LispJs.createObjFromArray(LispJs.list("name", LispJs.plus(LispJs.callFunWithObj($("#newName"), "val"), "pardo"), "phone", LispJs.callFunWithObj($("#newPhone"), "val"))));
+    LispJs.callFunWithObj(contacts, "push", LispJs.createObjFromArray(LispJs.list("name", LispJs.callFunWithObj($("#newName"), "val"), "phone", LispJs.callFunWithObj($("#newPhone"), "val"))));
     updateTable();
-    LispJs.callFunWithObj($("#addModal"), "modal", "hide");
+    return (LispJs.callFunWithObj($("#addModal"), "modal", "hide"));
   });
-  updateTable();
+  return (updateTable());
 });
-

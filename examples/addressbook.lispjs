@@ -27,7 +27,7 @@
   (call ($ "#addBtn") "click" (lambda()
     (call contacts "push"
       (object (list 
-        "name" (+ (call ($ "#newName") "val") "pardo" )
+        "name" (call ($ "#newName") "val") 
         "phone" (call ($ "#newPhone") "val"))))
     (updateTable)
     (call ($ "#addModal") "modal" "hide")))
