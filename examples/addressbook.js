@@ -1,23 +1,23 @@
 contacts = LispJs.list(LispJs.createObjFromArray(LispJs.list("name", "Dennis Ritchie", "phone", "3045553141")), LispJs.createObjFromArray(LispJs.list("name", "Edsger Dijkstra", "phone", "3045551618")), LispJs.createObjFromArray(LispJs.list("name", "Donald Knuth", "phone", "3045551346")));
 updateTable = function() {
-  LispJs.callFunWithObj($("#addrTbl tbody"), "html", "");
-  LispJs.callFunWithObj($, "each", contacts, function(i, x) {
-    return (LispJs.callFunWithObj($("#addrTbl tbody"), "append", LispJs.plus("<tr contacti='", i, "'><td>", (x).name, "</td> <td>", (x).phone, "</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>")));
+  ($("#addrTbl tbody")).html("");
+  ($).each(contacts, function(i, x) {
+    return (($("#addrTbl tbody")).append(LispJs.plus("<tr contacti='", i, "'><td>", (x).name, "</td> <td>", (x).phone, "</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>")));
   });
-  return (LispJs.callFunWithObj($(".btn-danger"), "click", function() {
-    contactId = LispJs.callFunWithObj(LispJs.callFunWithObj($(this), "parents", "tr"), "attr", "contacti");
-    LispJs.callFunWithObj(contacts, "splice", contactId, 1);
+  return (($(".btn-danger")).click(function() {
+    contactId = (($(this)).parents("tr")).attr("contacti");
+    (contacts).splice(contactId, 1);
     return (updateTable());
   }));
 };
 jQuery(function($) {
-  LispJs.callFunWithObj($("#addContactBtn"), "click", function() {
-    return (LispJs.callFunWithObj($("#addModal"), "modal"));
+  ($("#addContactBtn")).click(function() {
+    return (($("#addModal")).modal());
   });
-  LispJs.callFunWithObj($("#addBtn"), "click", function() {
-    LispJs.callFunWithObj(contacts, "push", LispJs.createObjFromArray(LispJs.list("name", LispJs.callFunWithObj($("#newName"), "val"), "phone", LispJs.callFunWithObj($("#newPhone"), "val"))));
+  ($("#addBtn")).click(function() {
+    (contacts).push(LispJs.createObjFromArray(LispJs.list("name", ($("#newName")).val(), "phone", ($("#newPhone")).val())));
     updateTable();
-    return (LispJs.callFunWithObj($("#addModal"), "modal", "hide"));
+    return (($("#addModal")).modal("hide"));
   });
   return (updateTable());
 });

@@ -47,10 +47,6 @@ LispJs.greaterThan = function(a, b) { return a > b; };
 
 LispJs.get = function(obj, i) { return obj[i]; };
 LispJs.set = function(obj, i, val) { obj[i] = val; };
-LispJs.callFunWithObj = function(obj, func) { 
-  var args = Array.prototype.slice.call(arguments);
-  return obj[func].apply(obj, args.slice(2)); 
-};
 
 
 // Underscore.js 1.4.4

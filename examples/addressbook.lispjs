@@ -10,25 +10,25 @@
     "phone" "3045551346"))))
 
 (def updateTable (lambda()
-  (call ($ "#addrTbl tbody") "html" "")
-  (call $ "each" contacts (lambda(i x)
-    (call ($ "#addrTbl tbody") "append" (+ "<tr contacti='" i "'><td>" 
+  ((-> ($ "#addrTbl tbody") "html") "")
+  ((-> $ "each") contacts (lambda(i x)
+    ((-> ($ "#addrTbl tbody") "append") (+ "<tr contacti='" i "'><td>" 
       (-> x "name") "</td> <td>" 
       (-> x "phone")"</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>"))))
-  (call ($ ".btn-danger") "click" (lambda () 
-    (def contactId (call (call ($ this) "parents" "tr") "attr" "contacti"))
-    (call contacts "splice" contactId 1)
+  ((-> ($ ".btn-danger") "click") (lambda () 
+    (def contactId ((-> ((-> ($ this) "parents") "tr") "attr") "contacti"))
+    ((-> contacts "splice") contactId 1)
     (updateTable)))))
 
 (jQuery (lambda($) 
-  (call ($ "#addContactBtn") "click" (lambda()
-    (call ($ "#addModal") "modal" )
+  ((-> ($ "#addContactBtn") "click") (lambda()
+    ((-> ($ "#addModal") "modal") )
   ))
-  (call ($ "#addBtn") "click" (lambda()
-    (call contacts "push"
+  ((-> ($ "#addBtn") "click") (lambda()
+    ((-> contacts "push")
       (object (list 
-        "name" (call ($ "#newName") "val") 
-        "phone" (call ($ "#newPhone") "val"))))
+        "name" ((-> ($ "#newName") "val")) 
+        "phone" ((-> ($ "#newPhone") "val")))))
     (updateTable)
-    (call ($ "#addModal") "modal" "hide")))
+    ((-> ($ "#addModal") "modal") "hide")))
   (updateTable)))
