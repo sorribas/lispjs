@@ -2,3 +2,4 @@
 /y.tab.c
 /y.tab.h
 /node_modules/*
+/lib-cov/*

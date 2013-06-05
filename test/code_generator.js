@@ -1,7 +1,7 @@
 var should = require('should');
-var parser = require('../syntax');
-var codeGenerator = require('../code_generator');
-var LispJs = require("../lispjsfuncs.js").LispJs;
+var parser = require('../lib-cov/syntax');
+var codeGenerator = require('../lib-cov/code_generator');
+var LispJs = require("../lib-cov/lispjsfuncs.js").LispJs;
 
 describe("code_generator", function() {
 
