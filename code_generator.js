@@ -58,6 +58,10 @@ var generateLambda = function(node) {
 }
 
 var generateFuncCall = function(node) {
+  if (node[0].txt == '->') {
+    generateArrowAccess(node);
+    return;
+  }
   generateCodeForNode(node[0]);
   code += "(";
 
@@ -72,6 +76,12 @@ var generateFuncCall = function(node) {
   });
 
   code += ")";
+}
+
+var generateArrowAccess = function(node) {
+  code += "(";
+  generateCodeForNode(node[1]);
+  code += ")." + node[2].txt.replace(/\"/g, "" );
 }
 
 var generateCodeForNode = function(node) {

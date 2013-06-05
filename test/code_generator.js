@@ -27,7 +27,7 @@ describe("code_generator", function() {
   });
 
   it("should correctly generate objects", function() {
-    var code = "(def edu (object (list \"name\" \"Edu\" \"gender\" \"male\")))";
+    var code = '(def edu (object (list "name" "Edu" "gender" "male")))';
     var sTree = parser.parse(code);
     var jsCode = codeGenerator.generateCodeForList(sTree);
     eval(jsCode);
@@ -47,10 +47,11 @@ describe("code_generator", function() {
   });
 
   it("should correctly call functions within an object", function() {
-    var code = "(def edu (object (list \"name\" \"Edu\" \"gender\" \"male\" \"salute\" (lambda (+ \"Hello, my name is \" (-> this \"name\") ) ))))";
-    code += "(def theSalute ((-> edu \"salute\")))";
+    var code = '(def edu (object (list "name" "Edu" "gender" "male" "salute" (lambda () (+ "Hello, my name is " (-> this "name") ) ))))';
+    code += '(def theSalute ((-> edu "salute")))';
     var sTree = parser.parse(code);
     var jsCode = codeGenerator.generateCodeForList(sTree);
+    console.log(jsCode);
     eval(jsCode);
     theSalute.should.equal("Hello, my name is Edu");
   });
