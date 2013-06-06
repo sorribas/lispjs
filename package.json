@@ -1,6 +1,6 @@
 {
   "name": "lispjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "start": "node lispjs"
   },
@@ -10,7 +10,7 @@
     "uglify-js": "2.3.6"
   },
   "bin": {
-    "lispjs": "./lispjs"
+    "lispjs": "./bin/lispjs"
   },
   "devDependencies": {
     "mocha": "1.10.0",
