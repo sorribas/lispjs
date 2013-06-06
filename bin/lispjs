@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 var pkginfo = require('pkginfo')(module, 'version');
 var argv = require('optimist').argv;
 var fs = require('fs');
@@ -22,11 +21,14 @@ fs.readFile(argv._[0], 'utf8', function(err, data) {
   var sTree = parser.parse(data);
   var semErrors = require('../lib/semantic_analyzer').getSemanticErrors(sTree);
   var code = require('../lib/code_generator').generateCodeForList(sTree);
-
-  fs.writeFile(argv.o, code, function(err) {
-    if (err) {
-      console.log("Error writing file "+ argv.o + ": " + err);
-      process.exit(2)
-    }
+  debugger;
+  fs.readFile(__dirname+"/../lib/lispjsfuncs.js", function(error, lispfuncsCode) {
+    var minifiedCode = require("uglify-js").minify(lispfuncsCode + "\n" + code, {fromString: true}).code;
+    fs.writeFile(argv.o, minifiedCode, function(err) {
+      if (err) {
+        console.log("Error writing file "+ argv.o + ": " + err);
+        process.exit(2)
+      }
+    });
   });
 });
