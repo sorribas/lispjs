@@ -1,7 +1,8 @@
+var libDir = process.env.LISPJS_COV==1 ? "../lib-cov/" : "../lib/";
 var should = require('should');
-var parser = require('../lib-cov/syntax');
-var codeGenerator = require('../lib-cov/code_generator');
-var LispJs = require("../lib-cov/lispjsfuncs.js").LispJs;
+var parser = require(libDir + 'syntax');
+var codeGenerator = require(libDir + 'code_generator');
+var LispJs = require(libDir + "lispjsfuncs.js").LispJs;
 
 describe("code_generator", function() {
 
@@ -51,8 +52,45 @@ describe("code_generator", function() {
     code += '(def theSalute ((-> edu "salute")))';
     var sTree = parser.parse(code);
     var jsCode = codeGenerator.generateCodeForList(sTree);
-    console.log(jsCode);
     eval(jsCode);
     theSalute.should.equal("Hello, my name is Edu");
+  });
+
+  it("should correctly generate basic arithmetic operations", function() {
+    var code = "(def a (+ 2 9))";
+    code += "(def b (- 8 2))";
+    code += "(def c (* 2 2))";
+    code += "(def d (/ 8 2))";
+    var sTree = parser.parse(code);
+    var jsCode = codeGenerator.generateCodeForList(sTree);
+    eval(jsCode);
+    a.should.equal(11);
+    b.should.equal(6);
+    c.should.equal(4);
+    d.should.equal(4);
+  });
+
+  it("should correctly generate map function calls", function() {
+    var code = "(def mapped (map (list 1 2 3 4 5) (lambda (x) (+ x x))))";
+    var sTree = parser.parse(code);
+    var jsCode = codeGenerator.generateCodeForList(sTree);
+    eval(jsCode);
+    mapped.should.eql([2, 4, 6, 8, 10]);
+  });
+
+  it("should correctly generate foldLeft function calls", function() {
+    var code = "(def folded (foldLeft (list 1 2 3 4 5) (lambda (a b) (+ a b))))";
+    var sTree = parser.parse(code);
+    var jsCode = codeGenerator.generateCodeForList(sTree);
+    eval(jsCode);
+    folded.should.equal(15);
+  });
+
+  it("should correctly generate foldRight function calls", function() {
+    var code = "(def rfolded (foldRight (list 1 3 9) (lambda (a b) (- a b))))";
+    var sTree = parser.parse(code);
+    var jsCode = codeGenerator.generateCodeForList(sTree);
+    eval(jsCode);
+    rfolded.should.equal(5);
   });
 });
