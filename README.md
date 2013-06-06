@@ -9,10 +9,10 @@ Installation
 ------------
 
 You can install LispJS with npm
-  npm install lispjs
+    npm install lispjs
 
 To compile a file
-  lispjs source.lispjs -o output.js
+    lispjs source.lispjs -o output.js
 
 The language
 ------------
@@ -20,45 +20,45 @@ The language
 The main idea of the language is to have a JavaScript with Lisp syntax.
 Let's start with a simple example
 
-  (alert "Hello World")
+    (alert "Hello World")
 
 As in any lisp the function execution in LispJS is (func param1 param2 ...)
 
 Now there are some specific functions to be used with LispJS such as the def function
 to define values.
 
-  (def a 3)
+    (def a 3)
 
 From that point on the 'a' identifier has the value '3' assigned. One important thing
 to know is the basic arithmetic functions
 
-  (def a (+ 2 2))
-  (def b (- 4 3))
-  (def c (\* 2 3))
-  (def d (/ 4 2))
+    (def a (+ 2 2))
+    (def b (- 4 3))
+    (def c (\* 2 3))
+    (def d (/ 4 2))
 
 This is equivalent to the JavaScript
-  var a = 2 + 2;
-  var b = 4 - 3;
-  var c = 2 * 3;
-  var d = 4 / 2;
+    var a = 2 + 2;
+    var b = 4 - 3;
+    var c = 2 * 3;
+    var d = 4 / 2;
 
 One of the most important things to do with any lisp is working with lists.
 This is the way to define lists in LispJS
 
-  (def xs (list 1 2 3 4))
+    (def xs (list 1 2 3 4))
 
 You can also use the 'car' and 'cdr' functions of lisp
 
-  (car xs) ; returns 1
-  (cdr xs) ; returns (2 3 4)
+    (car xs) ; returns 1
+    (cdr xs) ; returns (2 3 4)
 
 LispJS also includes some of the traditional lisp operators like map, foldLeft, 
 foldRight and filter. More are to be added in the future.
 
 To define JavaScript objects from LispJS you have to use a list, this way:
 
-  (def person (object (list
+    (def person (object (list
        "name" "Eduardo Sorribas"
        "country" "Dominican Republic")))
 
