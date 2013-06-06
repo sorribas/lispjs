@@ -1,7 +1,6 @@
 {
   "name": "lispjs",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "start": "node lispjs"
   },
@@ -16,5 +15,9 @@
   "devDependencies": {
     "mocha": "1.10.0",
     "should": "1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sorribas/lispjs"
   }
 }

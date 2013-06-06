@@ -14,7 +14,7 @@
   ((-> $ "each") contacts (lambda(i x)
     ((-> ($ "#addrTbl tbody") "append") (+ "<tr contacti='" i "'><td>" 
       (-> x "name") "</td> <td>" 
-      (-> x "phone")"</td><td><button class='btn btn-danger'>Eliminar</button></td></tr>"))))
+      (-> x "phone")"</td><td><button class='btn btn-danger'>Delete</button></td></tr>"))))
   ((-> ($ ".btn-danger") "click") (lambda () 
     (def contactId ((-> ((-> ($ this) "parents") "tr") "attr") "contacti"))
     ((-> contacts "splice") contactId 1)
