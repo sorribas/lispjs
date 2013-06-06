@@ -10,7 +10,7 @@ Installation
 
 You can install LispJS with npm
 
-    npm install lispjs
+    [sudo] npm install lispjs -g
 
 To compile a file
 
