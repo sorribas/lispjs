@@ -34,10 +34,11 @@ to know is the basic arithmetic functions
 
     (def a (+ 2 2))
     (def b (- 4 3))
-    (def c (\* 2 3))
+    (def c (* 2 3))
     (def d (/ 4 2))
 
 This is equivalent to the JavaScript
+
     var a = 2 + 2;
     var b = 4 - 3;
     var c = 2 * 3;
