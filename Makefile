@@ -2,6 +2,7 @@ all:
 	jison ./lib/syntax.jison -o ./lib/syntax.js
 clean:
 	rm ./lib/syntax.js
+	rm -rf ./lib-cov/
 test:
 	mocha
 test-with-coverage:

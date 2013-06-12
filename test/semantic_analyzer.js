@@ -10,14 +10,31 @@ describe("semantic_analyzer", function() {
     var errs = semanticAnalyzer.getSemanticErrors(sTree);
     errs[0].indexOf("Invalid function").should.not.equal(-1);
 
-    var code = '("myfunction" hey)';
-    var sTree = parser.parse(code);
-    var errs = semanticAnalyzer.getSemanticErrors(sTree);
+    code = '("myfunction" hey)';
+    sTree = parser.parse(code);
+    errs = semanticAnalyzer.getSemanticErrors(sTree);
     errs[0].indexOf("Invalid function").should.not.equal(-1);
 
-    var code = '(myfunction hey)';
+    code = '(myfunction hey)';
+    sTree = parser.parse(code);
+    errs = semanticAnalyzer.getSemanticErrors(sTree);
+    errs.length.should.equal(0);
+  });
+
+  it("should correctly detect a parameter list error", function() {
+    var code = "(def myfunction (lambda (3 a b) (+ a b)))";
     var sTree = parser.parse(code);
     var errs = semanticAnalyzer.getSemanticErrors(sTree);
+    errs[0].indexOf("Function parameters have to be identifiers").should.not.equal(-1);
+
+    code = '(def myfunction (lambda ("a" b) (+ a b)))';
+    sTree = parser.parse(code);
+    errs = semanticAnalyzer.getSemanticErrors(sTree);
+    errs[0].indexOf("Function parameters have to be identifiers").should.not.equal(-1);
+
+    code = '(def myfunction (lambda (a b) (+ a b)))';
+    sTree = parser.parse(code);
+    errs = semanticAnalyzer.getSemanticErrors(sTree);
     errs.length.should.equal(0);
   });
 });
