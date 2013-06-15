@@ -93,4 +93,12 @@ describe("code_generator", function() {
     eval(jsCode);
     rfolded.should.equal(5);
   });
+
+  it("should correctly generate cons function calls", function() {
+    var code = "(def lst (cons 0 (list 1 2 3 4 5)))";
+    var sTree = parser.parse(code);
+    var jsCode = codeGenerator.generateCodeForList(sTree);
+    eval(jsCode);
+    lst.should.eql([0, 1, 2, 3, 4, 5]);
+  });
 });
