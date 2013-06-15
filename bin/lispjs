@@ -18,7 +18,12 @@ fs.readFile(argv._[0], 'utf8', function(err, data) {
   }
 
   var parser = require('../lib/syntax');
-  var sTree = parser.parse(data);
+  try {
+    var sTree = parser.parse(data);
+  } catch(err) {
+    console.log(err);
+    process.exit(1);
+  }
   var semErrors = require('../lib/semantic_analyzer').getSemanticErrors(sTree);
   var code = require('../lib/code_generator').generateCodeForList(sTree);
   debugger;
