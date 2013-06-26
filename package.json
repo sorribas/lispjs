@@ -1,5 +1,6 @@
 {
   "name": "lispjs",
+  "description": "A small lisp-like language that compiles to JavaScript",
   "version": "0.0.3",
   "scripts": {
     "start": "node lispjs"
