@@ -78,7 +78,7 @@ analyzer is incomplete and the language lacks a lot of features. I uploaded on
 the chance that someone might be interested and would want to check and maybe 
 improve it a bit.
 
-I do not intend this language to be used for professional purposes.. I intend 
+I do not intend this language to be used for professional purposes. I intend 
 to improve the compiler whenever I have time. If you want to help you can try 
 to write some simple programs and report any issue you had. Or if you want you 
 can try to fix the issue and send a pull request.
