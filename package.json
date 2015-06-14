@@ -3,7 +3,8 @@
   "description": "A small lisp-like language that compiles to JavaScript",
   "version": "0.0.4",
   "scripts": {
-    "start": "node lispjs"
+    "start": "node lispjs",
+    "test": "make test"
   },
   "dependencies": {
     "optimist": "*",
