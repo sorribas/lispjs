@@ -1,39 +1,43 @@
 #!/usr/bin/env node
 
+var repl = require('./repl');
+var compile = require('../lib/compile');
 var pkginfo = require('pkginfo')(module, 'version');
 var argv = require('optimist').argv;
 var fs = require('fs');
 
-if (typeof argv._[0] == 'undefined' || typeof argv.o == 'undefined') {
+if (!argv._.length) {
+  repl();
+} else if (typeof argv.o == 'undefined') {
   console.log("LispJS " + module.exports.version);
   console.log("Usage: " + argv['$0'] + " -o outputfile.js inputfile.lispjs");
-  process.exit(0);
+} else {
+  main();
 }
 
-fs.readFile(argv._[0], 'utf8', function(err, data) {
+function main() {
+  fs.readFile(argv._[0], 'utf8', function(err, data) {
 
-  if (err) {
-    console.log("Error opening input file");
-    process.exit(1)
-  }
+    if (err) {
+      console.log("Error opening input file");
+      process.exit(1)
+    }
 
-  var parser = require('../lib/syntax');
-  try {
-    var sTree = parser.parse(data);
-  } catch(err) {
-    console.log(err);
-    process.exit(1);
-  }
-  var semErrors = require('../lib/semantic_analyzer').getSemanticErrors(sTree);
-  var code = require('../lib/code_generator').generateCodeForList(sTree);
-  debugger;
-  fs.readFile(__dirname+"/../lib/lispjsfuncs.js", function(error, lispfuncsCode) {
-    var minifiedCode = require("uglify-js").minify(lispfuncsCode + "\n" + code, {fromString: true}).code;
-    fs.writeFile(argv.o, minifiedCode, function(err) {
-      if (err) {
-        console.log("Error writing file "+ argv.o + ": " + err);
-        process.exit(2)
-      }
+    try {
+      var code = compile(data);
+    } catch(err) {
+      console.log(err);
+      process.exit(1);
+    }
+
+    fs.readFile(__dirname+"/../lib/lispjsfuncs.js", function(error, lispfuncsCode) {
+      var minifiedCode = require("uglify-js").minify(lispfuncsCode + "\n" + code, {fromString: true}).code;
+      fs.writeFile(argv.o, minifiedCode, function(err) {
+        if (err) {
+          console.log("Error writing file "+ argv.o + ": " + err);
+          process.exit(2)
+        }
+      });
     });
   });
-});
+}
